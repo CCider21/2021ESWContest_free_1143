@@ -37,6 +37,3 @@ class Touch():
 
 	def __del__(self):
 		GPIO.cleanup()
-
-Touch()
-message = input("Press Enter to exit")
