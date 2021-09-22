@@ -11,6 +11,7 @@
 > 단축키를 수행할 PC에서 사용하는 프로그램
 
 ### Installation
+
 + git clone https://github.com/CCider21/Wearable-shortcut-keyboard.git
 + pip install pynput
 + Raspberry Pi와 연결된 상태에서 Raspberry Pi 프로그램 먼저 실행 후 PC/main.py 실행
@@ -40,16 +41,20 @@
     <img width="355" alt="Key Mapper2" src="https://user-images.githubusercontent.com/67242042/134286601-7eb0f040-f516-477a-8411-42584defef61.PNG">   <img width="355" alt="Key Mapper3" src="https://user-images.githubusercontent.com/67242042/134290951-4315e524-dd28-40cd-a643-492cf04f6685.PNG">
     + 키 바인딩 화면으로 바뀐뒤 단축키를 입력하면 화면에 키보드로 입력한 내용이 보여진다. 이때 enter키를 누르면 해당 단축키가 Mapping되고, escape키를 누르면 변경되는 설정 없이 원래 화면으로 되돌아간다.
 
+
+
 ## Raspberry Pi program
 
 > 웨어러블 키보드 하드웨어 내에서 실행하는 프로그램
 
 ### Installation
+
 + git clone https://github.com/CCider21/Wearable-shortcut-keyboard.git
 + cd Raspberry\ Pi/
 + sudo python3 main.py
 
 ### Usage
+
   <img width="300" alt="WearableShortcutKeyboard1" src="https://user-images.githubusercontent.com/67242042/134286634-8094cb55-2ced-4021-aded-20caf07808f3.PNG">   <img width="330" alt="WearableShortcutKeyboard2" src="https://user-images.githubusercontent.com/67242042/134286645-f0270dc6-af11-40e1-9a9e-03416c11f70e.PNG">
 
   + 각각의 터치 센서는 짧게 누르는 경우와 길게 누르는 경우 다른 단축키로 동작가능하다.
