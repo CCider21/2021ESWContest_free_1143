@@ -18,7 +18,7 @@ class Touch():
 		self.add_events()
 
 	def touch_callback(self, pinNum):
-		index = (pinNum-29)/2
+		index = int((pinNum-29)/2)
 		if (GPIO.input(pinNum)):
 			self.pushtime[index] = time.time()
 		else:
@@ -35,6 +35,8 @@ class Touch():
 		GPIO.add_event_detect(SENSOR3, GPIO.BOTH, callback = self.touch_callback)
 		GPIO.add_event_detect(SENSOR4, GPIO.BOTH, callback = self.touch_callback)
 
+	def __del__(self):
+		GPIO.cleanup()
+
 Touch()
 message = input("Press Enter to exit")
-GPIO.cleanup()
