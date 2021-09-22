@@ -4,10 +4,17 @@ FILE = "./KeyMap.db"
 Sensors = ["검지 짧게","검지 길게","중지 짧게","중지 길게","약지 짧게","약지 길게","소지 짧게","소지 길게"]
 
 class DB():
-	def __init__(self, dbnum):
+	def __init__(self, dbnum=1):
 		self.conn = sq.connect(FILE)
 		self.cur = self.conn.cursor()
+		self.initDB()
 		self.db = self.getDB(dbnum)
+
+	def initDB(self):
+		self.cur.execute(f"SELECT * FROM sqlite_master WHERE type='table' AND name = 'DB'")
+		if not self.cur.fetchall():
+			self.cur.execute("CREATE TABLE DB (name TEXT)")
+			self.createDB(1)
 
 	def getDBnames(self):
 		self.cur.execute("SELECT * FROM DB")
@@ -39,8 +46,8 @@ class DB():
 
 	#delete table
 	def deleteDB(self):
-		tablenum = len(self.getDBnames())
-		if tablenum > 1:
+		dbnames = self.getDBnames()
+		if len(dbnames) > 1:
 			self.cur.execute("DELETE FROM DB WHERE name=(?)", (self.db,))
 			self.cur.execute("DROP TABLE " + self.db)
 			self.db = self.getDB(1)
@@ -68,3 +75,5 @@ class DB():
 		self.conn.commit()
 		self.conn.close()
 
+
+DB()

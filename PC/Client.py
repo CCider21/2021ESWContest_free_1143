@@ -1,7 +1,5 @@
-from os import pipe
 import socket
 import threading
-import time
 from pynput import keyboard
 from UI import UI
 from DB import DB
@@ -13,17 +11,19 @@ class Client(threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
 		self.setDaemon(True)
-		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		while True:
-			try:
-				self.socket.connect((IP,PORT))
-				break
-			except:
-				time.sleep(1)
-		print('Client has connected')
+		self.socket = None
+		self.connect()
 
 	def run(self):
 		self.recieve()
+
+	def connect(self):
+		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		try:
+			self.socket.connect((IP,PORT))
+			print('Client has connected')
+		except:
+			print('Connect fail')
 
 	def recieve(self):
 		while True:
@@ -34,10 +34,8 @@ class Client(threading.Thread):
 					db = DB(UI.curdb)
 					key = db.getkey(int(data)-1)
 					self.pressKeySet(key)
-
 			except socket.error:
-				self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-				self.socket.connect((IP,PORT))
+				self.connect()
 
 	def pressKeySet(keyset):
 		parsed = keyboard.HotKey.parse(keyset)
@@ -52,9 +50,4 @@ class Client(threading.Thread):
 				kbcontrol.release(parsed[-1])
 		loop(0)
 
-if __name__=="__main__":
-		client = Client()
-		client.start()
-		ui = UI()
-		ui.window.mainloop()
 

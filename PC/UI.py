@@ -87,7 +87,6 @@ class UI():
 	def applyclick(self):
 		self.db.apply()
 		UI.curdb = int(self.combo.get()[0])
-		print('UI: {}'.format(UI.curdb))
 
 	def updateTable(self) :
 		for i in self.keylist.get_children():
@@ -111,14 +110,12 @@ class UI():
 	def newclick(self) :
 		num = len(self.db.getDBnames())+1
 		self.db.createDB(num)
-		self.db.selectDB(num)
 		self.updateCombo()
 		self.combo.current(num-1)
 		self.updateTable()
 
 	def deleteclick(self) :
 		self.db.deleteDB()
-		self.combo.set("")
 		self.updateCombo()
 		self.combo.current(0)
 		self.updateTable()
@@ -131,11 +128,9 @@ class UI():
 
 	def setclick(self) :
 		index = int(self.combo.get()[0])
-		oldname = []
-		for i in self.combo['values']:
-			oldname.append(i[3:])
+		oldname = self.combo.get()[3:]
 		newname = self.newname.get()
-		if newname in oldname :
+		if newname == oldname :
 			tkinter.messagebox.showerror("Error", "you can't use the same name")
 		elif newname == "":
 			tkinter.messagebox.showerror("Error", "type new name")
