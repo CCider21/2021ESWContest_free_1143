@@ -49,5 +49,3 @@ class Client(threading.Thread):
 				kbcontrol.press(parsed[-1])
 				kbcontrol.release(parsed[-1])
 		loop(0)
-
-
