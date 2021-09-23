@@ -25,7 +25,7 @@ class Client(threading.Thread):
 		except:
 			print('Connect fail')
 
-	def recieve(self):
+	def receve(self):
 		while True:
 			try:
 				d = self.socket.recv(1024)
