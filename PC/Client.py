@@ -41,11 +41,11 @@ class Client(threading.Thread):
 		parsed = keyboard.HotKey.parse(keyset)
 		kbcontrol = keyboard.Controller()
 
-		def loop(i):
+		def pressKey(i):
 			if parsed[i] is not parsed[-1]:
 				with kbcontrol.pressed(parsed[i]):
 					loop(i+1)
 			else:
 				kbcontrol.press(parsed[-1])
 				kbcontrol.release(parsed[-1])
-		loop(0)
+		pressKey(0)
